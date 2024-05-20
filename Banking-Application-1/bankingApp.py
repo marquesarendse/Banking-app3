@@ -11,9 +11,13 @@ class BankingApplication:
         
 
         # Initialize balance and transactions
-        self.balance = 0.0
-        self.load_balance()
+        self.transaction_frame = tk.Frame(self.master)
 
+        self.balance_label = tk.Label(self.transaction_frame, text="Balance: R0.00")
+        self.balance_label.pack()
+
+        # Call load_balance() after balance_label is initialized
+        self.load_balance()
         # Initialize login/register frame
         self.login_register_frame = tk.Frame(self.master)
         self.login_register_frame.pack()
