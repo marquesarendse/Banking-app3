@@ -7,6 +7,8 @@ class BankingApplication:
         self.master = master
         self.master.title("Banking Application")
         self.master.geometry("500x500")
+        
+        
 
         # Initialize balance and transactions
         self.balance = 0.0
