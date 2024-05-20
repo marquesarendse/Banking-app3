@@ -70,7 +70,7 @@ class BankingApplication:
         # Initialize transaction frame
         self.transaction_frame = tk.Frame(self.master)
 
-        self.balance_label = tk.Label(self.transaction_frame, text="Balance: $0.00")
+        self.balance_label = tk.Label(self.transaction_frame, text="Balance: R0.00")
         self.balance_label.pack()
 
         self.transaction_prompt_label = tk.Label(self.transaction_frame, text="Would you like to make a transaction? (Yes/No)")
@@ -142,7 +142,7 @@ class BankingApplication:
         self.register_frame.pack()
 
     def update_balance_label(self):
-        self.balance_label.config(text="Balance: ${:.2f}".format(self.balance))
+        self.balance_label.config(text="Balance: R{:.2f}".format(self.balance))
 
     def login(self):
         # Reset registered flag to false when logging out
@@ -234,16 +234,16 @@ class BankingApplication:
             amount = float(self.amount_entry.get())
             if self.transaction_type == 'deposit':
                 self.balance += amount
-                self.log_transaction(f"Deposit: ${amount:.2f} on {datetime.now()}")
+                self.log_transaction(f"Deposit: R{amount:.2f} on {datetime.now()}")
             elif self.transaction_type == 'withdrawal':
                 if amount > self.balance:
                     messagebox.showerror("Transaction Error", "Insufficient funds for withdrawal.")
                     return
                 self.balance -= amount
-                self.log_transaction(f"Withdrawal: ${amount:.2f} on {datetime.now()}")
+                self.log_transaction(f"Withdrawal: R{amount:.2f} on {datetime.now()}")
             self.update_balance_label()
             self.save_balance()
-            messagebox.showinfo("Transaction Successful", f"Transaction successful! New balance: ${self.balance:.2f}")
+            messagebox.showinfo("Transaction Successful", f"Transaction successful! New balance: R{self.balance:.2f}")
         except ValueError:
             messagebox.showerror("Input Error", "You provided an invalid input.")
         self.amount_entry.delete(0, tk.END)
