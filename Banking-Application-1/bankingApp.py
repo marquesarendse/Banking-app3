@@ -1,28 +1,24 @@
 import tkinter as tk
 from tkinter import messagebox
 from datetime import datetime
+import os
 
 class BankingApplication:
     def __init__(self, master):
         self.master = master
         self.master.title("Banking Application")
         self.master.geometry("500x500")
-        
-        
 
-        # Initialize balance and transactions
-        self.transaction_frame = tk.Frame(self.master)
+        self.current_user = None
 
-        self.balance_label = tk.Label(self.transaction_frame, text="Balance: R0.00")
-        self.balance_label.pack()
+        # Initialize balance
+        self.balance = 0.0
 
-        # Call load_balance() after balance_label is initialized
-        self.load_balance()
         # Initialize login/register frame
-        self.login_register_frame = tk.Frame(self.master)
+        self.login_register_frame = tk.Frame(self.master, bg='cyan4')
         self.login_register_frame.pack()
-
-        self.username_label = tk.Label(self.login_register_frame, text="Username:")
+        
+        self.username_label = tk.Label(self.login_register_frame, text="Username:",)
         self.username_label.grid(row=0, column=0, padx=10, pady=5)
 
         self.username_entry = tk.Entry(self.login_register_frame)
@@ -79,38 +75,11 @@ class BankingApplication:
         self.balance_label = tk.Label(self.transaction_frame, text="Balance: R0.00")
         self.balance_label.pack()
 
-        self.transaction_prompt_label = tk.Label(self.transaction_frame, text="Would you like to make a transaction? (Yes/No)")
-        self.transaction_prompt_label.pack()
+        self.view_transactions_button = tk.Button(self.transaction_frame, text="View Transactions", command=self.view_transactions)
+        self.view_transactions_button.pack()
 
-        self.transaction_prompt_entry = tk.Entry(self.transaction_frame)
-        self.transaction_prompt_entry.pack()
-
-        self.transaction_prompt_button = tk.Button(self.transaction_frame, text="Submit", command=self.ask_transaction)
+        self.transaction_prompt_button = tk.Button(self.transaction_frame, text="Make a Transaction", command=self.show_transaction_type_screen)
         self.transaction_prompt_button.pack()
-
-        self.transaction_type_label = tk.Label(self.transaction_frame, text="Would you like to make a deposit or withdrawal? (Deposit/Withdrawal)")
-        self.transaction_type_label.pack()
-        self.transaction_type_label.pack_forget()
-
-        self.transaction_type_entry = tk.Entry(self.transaction_frame)
-        self.transaction_type_entry.pack()
-        self.transaction_type_entry.pack_forget()
-
-        self.transaction_type_button = tk.Button(self.transaction_frame, text="Submit", command=self.choose_transaction_type)
-        self.transaction_type_button.pack()
-        self.transaction_type_button.pack_forget()
-
-        self.amount_label = tk.Label(self.transaction_frame, text="Enter amount:")
-        self.amount_label.pack()
-        self.amount_label.pack_forget()
-
-        self.amount_entry = tk.Entry(self.transaction_frame)
-        self.amount_entry.pack()
-        self.amount_entry.pack_forget()
-
-        self.amount_button = tk.Button(self.transaction_frame, text="Submit", command=self.perform_transaction)
-        self.amount_button.pack()
-        self.amount_button.pack_forget()
 
         self.logout_button = tk.Button(self.transaction_frame, text="Logout", command=self.logout)
         self.logout_button.pack()
@@ -118,23 +87,71 @@ class BankingApplication:
         # Hide transaction frame initially
         self.transaction_frame.pack_forget()
 
+        # Initialize transaction type frame
+        self.transaction_type_frame = tk.Frame(self.master)
+
+        self.transaction_type_label = tk.Label(self.transaction_type_frame, text="Would you like to make a deposit or withdrawal? (Deposit/Withdrawal)")
+        self.transaction_type_label.pack()
+
+        self.transaction_type_entry = tk.Entry(self.transaction_type_frame)
+        self.transaction_type_entry.pack()
+
+        self.transaction_type_button = tk.Button(self.transaction_type_frame, text="Submit", command=self.choose_transaction_type)
+        self.transaction_type_button.pack()
+
+        # Hide transaction type frame initially
+        self.transaction_type_frame.pack_forget()
+
+        # Initialize amount frame
+        self.amount_frame = tk.Frame(self.master)
+
+        self.amount_label = tk.Label(self.amount_frame, text="Enter amount:")
+        self.amount_label.pack()
+
+        self.amount_entry = tk.Entry(self.amount_frame)
+        self.amount_entry.pack()
+
+        self.amount_button = tk.Button(self.amount_frame, text="Submit", command=self.perform_transaction)
+        self.amount_button.pack()
+
+        # Hide amount frame initially
+        self.amount_frame.pack_forget()
+
     def load_balance(self):
         try:
             with open("BankData.txt", "r") as file:
-                self.balance = float(file.read().strip())
-                self.update_balance_label()
+                for line in file:
+                    username, balance = line.strip().split(":")
+                    if username == self.current_user:
+                        self.balance = float(balance)
+                        break
+            self.update_balance_label()
         except FileNotFoundError:
             self.balance = 0.0
         except ValueError:
             self.balance = 0.0
 
     def save_balance(self):
+        data = []
+        if os.path.exists("BankData.txt"):
+            with open("BankData.txt", "r") as file:
+                data = file.readlines()
+        
         with open("BankData.txt", "w") as file:
-            file.write(f"{self.balance:.2f}")
+            user_found = False
+            for line in data:
+                username, balance = line.strip().split(":")
+                if username == self.current_user:
+                    file.write(f"{self.current_user}:{self.balance:.2f}\n")
+                    user_found = True
+                else:
+                    file.write(line)
+            if not user_found:
+                file.write(f"{self.current_user}:{self.balance:.2f}\n")
 
-    def log_transaction(self, transaction):
-        with open("TransactionLog.txt", "a") as file:
-            file.write(f"{transaction}\n")
+    def log_transaction(self, username, transaction):
+        with open("transactionLog.txt", "a") as file:
+            file.write(f"{username}: {transaction}\n")
 
     def show_transaction_screen(self):
         # Switch to transaction frame
@@ -147,21 +164,23 @@ class BankingApplication:
         self.login_register_frame.pack_forget()
         self.register_frame.pack()
 
+    def show_transaction_type_screen(self):
+        self.transaction_frame.pack_forget()
+        self.transaction_type_frame.pack()
+
     def update_balance_label(self):
         self.balance_label.config(text="Balance: R{:.2f}".format(self.balance))
 
     def login(self):
-        # Reset registered flag to false when logging out
-        self.registered = False
-        # Add your login logic here
         username = self.username_entry.get()
         password = self.password_entry.get()
         if self.is_user_registered(username, password):
             messagebox.showinfo("Login", "Login successful!")
-            self.registered = True
+            self.current_user = username
+            self.load_balance()
             self.show_transaction_screen()
         else:
-            messagebox.showerror("Login Error", "You are not registered. Please register first.")
+            messagebox.showerror("Login Error", "Invalid username or password.")
 
     def is_user_registered(self, username, password):
         try:
@@ -177,37 +196,29 @@ class BankingApplication:
         return False
 
     def register(self):
-        # Add your registration logic here
         name = self.name_entry.get()
         surname = self.surname_entry.get()
         password = self.password_entry_reg.get()
         dob_str = self.dob_entry.get()
 
-        # Validate if all fields are filled
         if name and surname and password and dob_str:
-            # Convert dob_str to datetime object
             try:
                 dob = datetime.strptime(dob_str, '%Y-%m-%d')
             except ValueError:
                 messagebox.showerror("Register Error", "Invalid Date of Birth format. Please use YYYY-MM-DD.")
                 return
 
-            # Calculate age
             today = datetime.today()
             age = today.year - dob.year - ((today.month, today.day) < (dob.month, dob.day))
 
-            # Check if age is at least 16
             if age >= 16:
-                # Save user data to a text file
                 with open("user_data.txt", "a") as file:
                     file.write(f"{name},{surname},{password},{dob_str}\n")
                 messagebox.showinfo("Register", "Registration successful!")
-                # Clear the registration entry fields
                 self.name_entry.delete(0, tk.END)
                 self.surname_entry.delete(0, tk.END)
                 self.password_entry_reg.delete(0, tk.END)
                 self.dob_entry.delete(0, tk.END)
-                # Switch back to the login screen
                 self.register_frame.pack_forget()
                 self.login_register_frame.pack()
             else:
@@ -215,23 +226,11 @@ class BankingApplication:
         else:
             messagebox.showerror("Register Error", "Please fill in all fields.")
 
-    def ask_transaction(self):
-        response = self.transaction_prompt_entry.get().strip().lower()
-        if response == 'yes':
-            self.transaction_type_label.pack()
-            self.transaction_type_entry.pack()
-            self.transaction_type_button.pack()
-        elif response == 'no':
-            messagebox.showinfo("Transaction", "No transaction made.")
-        else:
-            messagebox.showerror("Input Error", "You provided an invalid input.")
-
     def choose_transaction_type(self):
         self.transaction_type = self.transaction_type_entry.get().strip().lower()
         if self.transaction_type in ['deposit', 'withdrawal']:
-            self.amount_label.pack()
-            self.amount_entry.pack()
-            self.amount_button.pack()
+            self.transaction_type_frame.pack_forget()
+            self.amount_frame.pack()
         else:
             messagebox.showerror("Input Error", "You provided an invalid input.")
 
@@ -240,26 +239,42 @@ class BankingApplication:
             amount = float(self.amount_entry.get())
             if self.transaction_type == 'deposit':
                 self.balance += amount
-                self.log_transaction(f"Deposit: R{amount:.2f} on {datetime.now()}")
+                transaction_details = f"Deposit: R{amount:.2f} on {datetime.now()}"
             elif self.transaction_type == 'withdrawal':
                 if amount > self.balance:
                     messagebox.showerror("Transaction Error", "Insufficient funds for withdrawal.")
                     return
                 self.balance -= amount
-                self.log_transaction(f"Withdrawal: R{amount:.2f} on {datetime.now()}")
+                transaction_details = f"Withdrawal: R{amount:.2f} on {datetime.now()}"
+            self.log_transaction(self.current_user, transaction_details)
             self.update_balance_label()
             self.save_balance()
             messagebox.showinfo("Transaction Successful", f"Transaction successful! New balance: R{self.balance:.2f}")
         except ValueError:
             messagebox.showerror("Input Error", "You provided an invalid input.")
         self.amount_entry.delete(0, tk.END)
+        self.amount_frame.pack_forget()
+        self.transaction_frame.pack()
+
+    def view_transactions(self):
+        try:
+            with open("transactionLog.txt", "r") as file:
+                transactions = [line.strip() for line in file.readlines() if line.startswith(f"{self.current_user}:")]
+                if transactions:
+                    transaction_history = "\n".join(transactions)
+                    messagebox.showinfo("Transaction Log", transaction_history)
+                else:
+                    messagebox.showinfo("Transaction Log", "No transactions found.")
+        except FileNotFoundError:
+            messagebox.showerror("Error", "Transaction log file not found.")
 
     def logout(self):
-        # Hide transaction frame and show login/register frame
+        self.current_user = None
         self.transaction_frame.pack_forget()
         self.login_register_frame.pack()
 
 if __name__ == "__main__":
     root = tk.Tk()
+    root.configure(bg='cyan4')
     app = BankingApplication(root)
     root.mainloop()
