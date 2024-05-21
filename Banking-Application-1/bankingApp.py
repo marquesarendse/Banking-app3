@@ -18,52 +18,52 @@ class BankingApplication:
         self.login_register_frame = tk.Frame(self.master, bg='cyan4')
         self.login_register_frame.pack()
         
-        self.username_label = tk.Label(self.login_register_frame, text="Username:",)
+        self.username_label = tk.Label(self.login_register_frame, text="Username:", font=("Helvetica", 12))
         self.username_label.grid(row=0, column=0, padx=10, pady=5)
 
-        self.username_entry = tk.Entry(self.login_register_frame)
-        self.username_entry.grid(row=0, column=1, padx=10, pady=5)
+        self.username_entry = tk.Entry(self.login_register_frame, font=("Helvetica", 12) )
+        self.username_entry.grid(row=0, column=1, padx=10, pady=5, )
 
-        self.password_label = tk.Label(self.login_register_frame, text="Password:")
+        self.password_label = tk.Label(self.login_register_frame, text="Password:", font=("Helvetica", 12))
         self.password_label.grid(row=1, column=0, padx=10, pady=5)
 
-        self.password_entry = tk.Entry(self.login_register_frame, show="*")
+        self.password_entry = tk.Entry(self.login_register_frame, show="*", font=("Helvetica", 12))
         self.password_entry.grid(row=1, column=1, padx=10, pady=5)
 
-        self.login_button = tk.Button(self.login_register_frame, text="Login", command=self.login)
+        self.login_button = tk.Button(self.login_register_frame, text="Login", command=self.login, font=("Helvetica", 12))
         self.login_button.grid(row=2, column=0, columnspan=2, padx=10, pady=5)
 
-        self.register_button = tk.Button(self.login_register_frame, text="Register", command=self.show_register_screen)
+        self.register_button = tk.Button(self.login_register_frame, text="Register", command=self.show_register_screen, font=("Helvetica", 12))
         self.register_button.grid(row=3, column=0, columnspan=2, padx=10, pady=5)
 
         # Initialize registration frame
         self.register_frame = tk.Frame(self.master)
 
-        self.name_label = tk.Label(self.register_frame, text="Name:")
+        self.name_label = tk.Label(self.register_frame, text="Name:", font=("Helvetica", 12))
         self.name_label.grid(row=0, column=0, padx=10, pady=5)
 
-        self.name_entry = tk.Entry(self.register_frame)
+        self.name_entry = tk.Entry(self.register_frame, font=("Helvetica", 12))
         self.name_entry.grid(row=0, column=1, padx=10, pady=5)
 
-        self.surname_label = tk.Label(self.register_frame, text="Surname:")
+        self.surname_label = tk.Label(self.register_frame, text="Surname:", font=("Helvetica", 12))
         self.surname_label.grid(row=1, column=0, padx=10, pady=5)
 
-        self.surname_entry = tk.Entry(self.register_frame)
+        self.surname_entry = tk.Entry(self.register_frame, font=("Helvetica", 12))
         self.surname_entry.grid(row=1, column=1, padx=10, pady=5)
 
-        self.password_label_reg = tk.Label(self.register_frame, text="Password:")
+        self.password_label_reg = tk.Label(self.register_frame, text="Password:", font=("Helvetica", 12))
         self.password_label_reg.grid(row=2, column=0, padx=10, pady=5)
 
-        self.password_entry_reg = tk.Entry(self.register_frame, show="*")
+        self.password_entry_reg = tk.Entry(self.register_frame, show="*", font=("Helvetica", 12))
         self.password_entry_reg.grid(row=2, column=1, padx=10, pady=5)
 
-        self.dob_label = tk.Label(self.register_frame, text="Date of Birth (YYYY-MM-DD):")
+        self.dob_label = tk.Label(self.register_frame, text="Date of Birth (YYYY-MM-DD):", font=("Helvetica", 12))
         self.dob_label.grid(row=3, column=0, padx=10, pady=5)
 
-        self.dob_entry = tk.Entry(self.register_frame)
+        self.dob_entry = tk.Entry(self.register_frame, font=("Helvetica", 12))
         self.dob_entry.grid(row=3, column=1, padx=10, pady=5)
 
-        self.register_submit_button = tk.Button(self.register_frame, text="Register", command=self.register)
+        self.register_submit_button = tk.Button(self.register_frame, text="Register", command=self.register, font=("Helvetica", 12))
         self.register_submit_button.grid(row=4, column=0, columnspan=2, padx=10, pady=5)
 
         # Hide registration frame initially
@@ -72,16 +72,16 @@ class BankingApplication:
         # Initialize transaction frame
         self.transaction_frame = tk.Frame(self.master)
 
-        self.balance_label = tk.Label(self.transaction_frame, text="Balance: R0.00")
+        self.balance_label = tk.Label(self.transaction_frame, text="Balance: R0.00", font=("Helvetica", 12))
         self.balance_label.pack()
 
         self.view_transactions_button = tk.Button(self.transaction_frame, text="View Transactions", command=self.view_transactions)
         self.view_transactions_button.pack()
 
-        self.transaction_prompt_button = tk.Button(self.transaction_frame, text="Make a Transaction", command=self.show_transaction_type_screen)
+        self.transaction_prompt_button = tk.Button(self.transaction_frame, text="Make a Transaction", command=self.show_transaction_type_screen, font=("Helvetica", 12))
         self.transaction_prompt_button.pack()
 
-        self.logout_button = tk.Button(self.transaction_frame, text="Logout", command=self.logout)
+        self.logout_button = tk.Button(self.transaction_frame, text="Logout", command=self.logout, font=("Helvetica", 12))
         self.logout_button.pack()
 
         # Hide transaction frame initially
@@ -90,13 +90,13 @@ class BankingApplication:
         # Initialize transaction type frame
         self.transaction_type_frame = tk.Frame(self.master)
 
-        self.transaction_type_label = tk.Label(self.transaction_type_frame, text="Would you like to make a deposit or withdrawal? (Deposit/Withdrawal)")
+        self.transaction_type_label = tk.Label(self.transaction_type_frame, text="Would you like to make a deposit or withdrawal? (Deposit/Withdrawal)",font=("Helvetica", 12))
         self.transaction_type_label.pack()
 
-        self.transaction_type_entry = tk.Entry(self.transaction_type_frame)
+        self.transaction_type_entry = tk.Entry(self.transaction_type_frame, font=("Helvetica", 12))
         self.transaction_type_entry.pack()
 
-        self.transaction_type_button = tk.Button(self.transaction_type_frame, text="Submit", command=self.choose_transaction_type)
+        self.transaction_type_button = tk.Button(self.transaction_type_frame, text="Submit", command=self.choose_transaction_type, font=("Helvetica", 12))
         self.transaction_type_button.pack()
 
         # Hide transaction type frame initially
@@ -105,13 +105,13 @@ class BankingApplication:
         # Initialize amount frame
         self.amount_frame = tk.Frame(self.master)
 
-        self.amount_label = tk.Label(self.amount_frame, text="Enter amount:")
+        self.amount_label = tk.Label(self.amount_frame, text="Enter amount:", font=("Helvetica", 12))
         self.amount_label.pack()
 
-        self.amount_entry = tk.Entry(self.amount_frame)
+        self.amount_entry = tk.Entry(self.amount_frame, font=("Helvetica", 12))
         self.amount_entry.pack()
 
-        self.amount_button = tk.Button(self.amount_frame, text="Submit", command=self.perform_transaction)
+        self.amount_button = tk.Button(self.amount_frame, text="Submit", command=self.perform_transaction, font=("Helvetica", 12))
         self.amount_button.pack()
 
         # Hide amount frame initially
