@@ -8,7 +8,7 @@ class BankingApplication:
         self.master = master
         self.master.title("Banking Application")
         self.master.geometry("500x500")
-
+        
         self.current_user = None
 
         # Initialize balance
@@ -278,3 +278,5 @@ if __name__ == "__main__":
     root.configure(bg='cyan4')
     app = BankingApplication(root)
     root.mainloop()
+    
+   
