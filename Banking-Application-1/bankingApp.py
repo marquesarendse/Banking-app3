@@ -4,10 +4,11 @@ from datetime import datetime
 import os
 from PIL import Image, ImageTk
 
+
 class BankingApplication:
     def __init__(self, master):
         self.master = master
-        self.master.title("Banking Application")
+        self.master.title("PocketGuard")
         self.master.geometry("500x500")
         
         self.current_user = None
@@ -82,6 +83,10 @@ class BankingApplication:
 
         self.register_submit_button = tk.Button(self.register_frame, text="Register", command=self.register, font=("Helvetica", 12))
         self.register_submit_button.grid(row=4, column=0, columnspan=2, padx=10, pady=5)
+        
+   
+
+
 
         # Hide registration frame initially
         self.register_frame.pack_forget()
