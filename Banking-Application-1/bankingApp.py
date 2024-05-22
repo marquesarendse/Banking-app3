@@ -84,7 +84,7 @@ class BankingApplication:
         self.balance_label = tk.Label(self.transaction_frame, text="Balance: R0.00", font=("Helvetica", 12))
         self.balance_label.pack()
 
-        self.view_transactions_button = tk.Button(self.transaction_frame, text="View Transactions", command=self.view_transactions)
+        self.view_transactions_button = tk.Button(self.transaction_frame, text="View Transactions", command=self.view_transactions, font=("Helvetica", 12))
         self.view_transactions_button.pack()
 
         self.transaction_prompt_button = tk.Button(self.transaction_frame, text="Make a Transaction", command=self.show_transaction_type_screen, font=("Helvetica", 12))
@@ -281,6 +281,7 @@ class BankingApplication:
         self.current_user = None
         self.transaction_frame.pack_forget()
         self.login_register_frame.pack()
+
 
 if __name__ == "__main__":
     root = tk.Tk()
