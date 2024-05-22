@@ -2,40 +2,49 @@ import  tkinter as tk
 from tkinter import messagebox
 from datetime import datetime
 import os
+from PIL import Image, ImageTk
 
 class BankingApplication:
     def __init__(self, master):
         self.master = master
         self.master.title("Banking Application")
         self.master.geometry("500x500")
-
+        
         self.current_user = None
 
         # Initialize balance
         self.balance = 0.0
+        
 
         # Initialize login/register frame
         self.login_register_frame = tk.Frame(self.master, bg='cyan4')
-        self.login_register_frame.pack()
+        self.login_register_frame.pack(fill=tk.BOTH, expand=True)
         
-        self.username_label = tk.Label(self.login_register_frame, text="Username:", font=("Helvetica", 12))
-        self.username_label.grid(row=0, column=0, padx=10, pady=5)
+        # Load and place the logo
+        self.logo_image = Image.open("Image\logo.png")
+        self.logo_image = self.logo_image.resize((200, 200))
+        self.logo_photo = ImageTk.PhotoImage(self.logo_image)
+        self.logo_label = tk.Label(self.login_register_frame, image=self.logo_photo, bg='cyan4')
+        self.logo_label.grid(row=0, column=0, rowspan=4, padx=20, pady=20, sticky='w')
+        
+        self.username_label = tk.Label(self.login_register_frame, text="Username:", font=("Helvetica", 12), bg='cyan4', fg='white')
+        self.username_label.grid(row=0, column=1, padx=10, pady=5, sticky='e')
 
-        self.username_entry = tk.Entry(self.login_register_frame, font=("Helvetica", 12) )
-        self.username_entry.grid(row=0, column=1, padx=10, pady=5, )
+        self.username_entry = tk.Entry(self.login_register_frame, font=("Helvetica", 12))
+        self.username_entry.grid(row=0, column=2, padx=10, pady=5, sticky='w')
 
-        self.password_label = tk.Label(self.login_register_frame, text="Password:", font=("Helvetica", 12))
-        self.password_label.grid(row=1, column=0, padx=10, pady=5)
+        self.password_label = tk.Label(self.login_register_frame, text="Password:", font=("Helvetica", 12), bg='cyan4', fg='white')
+        self.password_label.grid(row=1, column=1, padx=10, pady=5, sticky='e')
 
         self.password_entry = tk.Entry(self.login_register_frame, show="*", font=("Helvetica", 12))
-        self.password_entry.grid(row=1, column=1, padx=10, pady=5)
+        self.password_entry.grid(row=1, column=2, padx=10, pady=5, sticky='w')
 
         self.login_button = tk.Button(self.login_register_frame, text="Login", command=self.login, font=("Helvetica", 12))
-        self.login_button.grid(row=2, column=0, columnspan=2, padx=10, pady=5)
+        self.login_button.grid(row=2, column=1, columnspan=2, padx=10, pady=5)
 
         self.register_button = tk.Button(self.login_register_frame, text="Register", command=self.show_register_screen, font=("Helvetica", 12))
-        self.register_button.grid(row=3, column=0, columnspan=2, padx=10, pady=5)
-
+        self.register_button.grid(row=3, column=1, columnspan=2, padx=10, pady=5)
+        
         # Initialize registration frame
         self.register_frame = tk.Frame(self.master)
 
@@ -278,3 +287,5 @@ if __name__ == "__main__":
     root.configure(bg='cyan4')
     app = BankingApplication(root)
     root.mainloop()
+    
+   
