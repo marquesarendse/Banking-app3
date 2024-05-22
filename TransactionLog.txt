@@ -10,3 +10,7 @@ thando: Withdrawal: R1000.00 on 2024-05-21 11:44:45.120063
 thando: Withdrawal: R100.00 on 2024-05-21 13:24:21.905166
 thando: Withdrawal: R100.00 on 2024-05-21 13:24:31.889449
 >>>>>>> 3a77348d4637360392cdfa9a7d6dbd2db6caae88
+thando: Deposit: R100.00 on 2024-05-22 10:34:39.673200
+thando: Withdrawal: R0.00 on 2024-05-22 10:40:42.624967
+thando: Deposit: R100.00 on 2024-05-22 10:43:31.236343
+thando: Withdrawal: R20.00 on 2024-05-22 10:43:52.412164

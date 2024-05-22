@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-siphelo:5400.00
-=======
-thando:199000.00
->>>>>>> 3a77348d4637360392cdfa9a7d6dbd2db6caae88
+thando:80.00
