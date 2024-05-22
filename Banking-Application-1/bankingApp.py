@@ -9,7 +9,7 @@ class BankingApplication:
         self.master = master
         self.master.title("Banking Application")
         self.master.geometry("500x500")
-
+        
         self.current_user = None
 
         # Initialize balance
@@ -21,7 +21,7 @@ class BankingApplication:
         self.login_register_frame.pack(fill=tk.BOTH, expand=True)
         
         # Load and place the logo
-        self.logo_image = Image.open("logo.png")
+        self.logo_image = Image.open("Image\logo.png")
         self.logo_image = self.logo_image.resize((200, 200))
         self.logo_photo = ImageTk.PhotoImage(self.logo_image)
         self.logo_label = tk.Label(self.login_register_frame, image=self.logo_photo, bg='cyan4')
@@ -287,3 +287,5 @@ if __name__ == "__main__":
     root.configure(bg='cyan4')
     app = BankingApplication(root)
     root.mainloop()
+    
+   
