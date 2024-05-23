@@ -89,10 +89,16 @@ class BankingApplication:
         # Password generator button
         self.generate_password_button = tk.Button(self.register_frame, text="Generate Password", command=self.generate_password, font=("Helvetica", 12))
         self.generate_password_button.grid(row=5, column=0, columnspan=2, padx=10, pady=5)
+         
 
         # Back button for registration frame
         self.register_back_button = tk.Button(self.register_frame, text="Back", command=self.go_back, font=("Helvetica", 12))
         self.register_back_button.grid(row=6, column=0, columnspan=2, padx=10, pady=5)
+
+        self.eye_button = tk.Button(self.register_frame, text="👁️", command=self.toggle_password_visibility, bd=0, font=("Segoe UI Emoji", 10))
+        self.eye_button.grid(row=2, column=2, padx=10, pady=5, sticky="w")
+
+        self.password_visible = False
         
         # Hide registration frame initially
         self.register_frame.pack_forget()
