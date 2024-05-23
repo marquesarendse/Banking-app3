@@ -1,3 +1,4 @@
+from dis import show_code
 import tkinter as tk
 from tkinter import messagebox
 from datetime import datetime
@@ -41,7 +42,7 @@ class BankingApplication:
         self.password_label = tk.Label(self.login_register_frame, text="Password:", font=("Helvetica", 12),bg="white", fg='black')
         self.password_label.grid(row=input_row, column=4, padx=10, pady=5, sticky='e')
 
-        self.password_entry = tk.Entry(self.login_register_frame, show="*", font=("Helvetica", 12),highlightbackground="black", highlightthickness=2)
+        self.password_entry = tk.Entry(self.login_register_frame, show="", font=("Helvetica", 12),highlightbackground="black", highlightthickness=2)
         self.password_entry.grid(row=input_row, column=6, padx=10, pady=5, sticky='w')
 
         input_row += 1
@@ -69,10 +70,10 @@ class BankingApplication:
         self.surname_entry = tk.Entry(self.register_frame, font=("Helvetica", 12),bg="white",highlightbackground="black", highlightthickness=2)
         self.surname_entry.grid(row=1, column=1, padx=10, pady=5)
 
-        self.password_label_reg = tk.Label(self.register_frame, text="Password:", font=("Helvetica", 12),bg="white")
+        self.password_label_reg = tk.Label(self.register_frame, text="Password:", font=("Helvetica", 12),bg="white",)
         self.password_label_reg.grid(row=2, column=0, padx=10, pady=5)
 
-        self.password_entry_reg = tk.Entry(self.register_frame, show="*", font=("Helvetica", 12),highlightbackground="black", highlightthickness=2)
+        self.password_entry_reg = tk.Entry(self.register_frame, font=("Helvetica", 12),highlightbackground="black", highlightthickness=2)
         self.password_entry_reg.grid(row=2, column=1, padx=10, pady=5)
 
         self.dob_label = tk.Label(self.register_frame, text="Date of Birth (YYYY-MM-DD):", font=("Helvetica", 12),bg="white")
@@ -300,6 +301,7 @@ class BankingApplication:
         password = ''.join(random.sample(characters, 12))
         self.password_entry_reg.delete(0, tk.END)
         self.password_entry_reg.insert(0, password)
+        self.password_entry_reg.config(show="")
 
 if __name__ == "__main__":
     root = tk.Tk()
