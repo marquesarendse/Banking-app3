@@ -14,4 +14,9 @@ thando: Deposit: R100.00 on 2024-05-22 10:34:39.673200
 thando: Withdrawal: R0.00 on 2024-05-22 10:40:42.624967
 thando: Deposit: R100.00 on 2024-05-22 10:43:31.236343
 thando: Withdrawal: R20.00 on 2024-05-22 10:43:52.412164
+<<<<<<< HEAD
+siphelo: Deposit: R700.00 on 2024-05-22 11:30:20.571384
+siphelo: Deposit: R500.00 on 2024-05-22 11:31:46.790583
+=======
 thando: Deposit: R1100.00 on 2024-05-22 14:51:50.922803
+>>>>>>> 3651e74e6989ae24c49720e5a4cf01aac05d346b
