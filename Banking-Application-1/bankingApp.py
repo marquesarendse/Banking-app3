@@ -28,6 +28,7 @@ class BankingApplication:
         self.logo_label = tk.Label(self.login_register_frame, image=self.logo_photo, bg="white" )
         self.logo_label.grid(row=0, column=6, columnspan=2, padx=10, pady=10, sticky='w')
 
+
         input_row = 1
 
         self.username_label = tk.Label(self.login_register_frame, text="Username:", font=("Helvetica", 12), bg="white", fg='black')
@@ -87,6 +88,13 @@ class BankingApplication:
         # Password generator button
         self.generate_password_button = tk.Button(self.register_frame, text="Generate Password", command=self.generate_password, font=("Helvetica", 12))
         self.generate_password_button.grid(row=5, column=0,columnspan=2, padx=10, pady=5)
+
+         # Create eye button
+        self.eye_button = tk.Button(self.register_frame, text="👁️", command=self.toggle_password_visibility, bd=0, font=("Segoe UI Emoji", 10))
+        self.eye_button.grid(row=2, column=2, padx=10, pady=5, sticky="w")
+
+        # Set initial password visibility state
+        self.password_visible = False
 
         # Hide registration frame initially
         self.register_frame.pack_forget()
@@ -300,7 +308,15 @@ class BankingApplication:
         password = ''.join(random.sample(characters, 12))
         self.password_entry_reg.delete(0, tk.END)
         self.password_entry_reg.insert(0, password)
-        self.password_entry_reg.config(show="")
+        self.password_entry_reg.config(show="*")
+    def toggle_password_visibility(self):
+        if self.password_visible:
+            self.password_entry_reg.config(show="*")
+            self.eye_button.config(text="👁️")
+        else:
+            self.password_entry_reg.config(show="")
+            self.eye_button.config(text="👁️")
+        self.password_visible = not self.password_visible
 
 if __name__ == "__main__":
     root = tk.Tk()
