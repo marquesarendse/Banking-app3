@@ -1,1 +1,2 @@
 thando:80.00
+siphelo:1200.00
