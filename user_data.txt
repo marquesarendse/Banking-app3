@@ -2,3 +2,4 @@ siphelo,Nyandana,12345,2000-05-03
 thando,no,winner,1997-09-17
 Will,Smith,12345,1995-06-17
 naye,n,@c9pe%:Dv5#z,1999-07-24
+Anele,Mandela,Anele@2024#,2002-11-22
