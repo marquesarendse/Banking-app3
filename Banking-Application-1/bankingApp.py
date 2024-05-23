@@ -1,20 +1,21 @@
-import  tkinter as tk
+import tkinter as tk
 from tkinter import messagebox
 from datetime import datetime
 import os
 from PIL import Image, ImageTk
+import random
+import string
 
 class BankingApplication:
     def __init__(self, master):
         self.master = master
-        self.master.title("Banking Application")
+        self.master.title("PocketGuard")
         self.master.geometry("500x500")
         
         self.current_user = None
 
         # Initialize balance
         self.balance = 0.0
-        
 
         # Initialize login/register frame
         self.login_register_frame = tk.Frame(self.master, bg="white" )
@@ -82,6 +83,10 @@ class BankingApplication:
 
         self.register_submit_button = tk.Button(self.register_frame, text="Register", command=self.register, font=("Helvetica", 12))
         self.register_submit_button.grid(row=4, column=0, columnspan=2, padx=10, pady=5)
+        
+        # Password generator button
+        self.generate_password_button = tk.Button(self.register_frame, text="Generate Password", command=self.generate_password, font=("Helvetica", 12))
+        self.generate_password_button.grid(row=5, column=0,columnspan=2, padx=10, pady=5)
 
         # Hide registration frame initially
         self.register_frame.pack_forget()
@@ -290,11 +295,17 @@ class BankingApplication:
         self.transaction_frame.pack_forget()
         self.login_register_frame.pack()
 
+    def generate_password(self):
+        characters = string.ascii_letters + string.digits + string.punctuation
+        password = ''.join(random.sample(characters, 12))
+        self.password_entry_reg.delete(0, tk.END)
+        self.password_entry_reg.insert(0, password)
 
 if __name__ == "__main__":
     root = tk.Tk()
     root.configure(bg='white')
     app = BankingApplication(root)
     root.mainloop()
+
     
    

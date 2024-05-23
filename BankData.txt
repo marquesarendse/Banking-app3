@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 thando:80.00
 siphelo:1200.00
+=======
+thando:1180.00
+>>>>>>> 3651e74e6989ae24c49720e5a4cf01aac05d346b
