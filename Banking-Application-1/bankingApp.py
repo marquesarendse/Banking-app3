@@ -29,6 +29,7 @@ class BankingApplication:
         self.logo_label = tk.Label(self.login_register_frame, image=self.logo_photo, bg="white")
         self.logo_label.grid(row=0, column=6, columnspan=2, padx=10, pady=10, sticky='w')
 
+
         input_row = 1
 
         self.username_label = tk.Label(self.login_register_frame, text="Username:", font=("Helvetica", 12), bg="white", fg='black')
@@ -315,6 +316,15 @@ class BankingApplication:
         password = ''.join(random.sample(characters, 12))
         self.password_entry_reg.delete(0, tk.END)
         self.password_entry_reg.insert(0, password)
+        self.password_entry_reg.config(show="*")
+    def toggle_password_visibility(self):
+        if self.password_visible:
+            self.password_entry_reg.config(show="*")
+            self.eye_button.config(text="👁️")
+        else:
+            self.password_entry_reg.config(show="")
+            self.eye_button.config(text="👁️")
+        self.password_visible = not self.password_visible
 
 if __name__ == "__main__":
     root = tk.Tk()
