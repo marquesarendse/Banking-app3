@@ -9,3 +9,6 @@ Will,Smith,12345,1995-06-17
 naye,n,@c9pe%:Dv5#z,1999-07-24
 Anele,Mandela,Anele@2024#,2002-11-22
 Thabo,Ryan,3Ez@Sya}Fe%4,2003-05-09
+bukho,zungu,iBb9dGq6N'.H,1996-06-04
+bukhp,zungu,(j?`=B)>TpJ',1996-09-09
+bukho,zungu,K=<vf'qoTbjN,2000-05-07

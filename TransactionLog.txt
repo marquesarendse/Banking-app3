@@ -24,3 +24,6 @@ Al-Yasha: Withdrawal: R300000.00 on 2024-05-22 21:14:49.566073
 Munchie: Deposit: R1000000.00 on 2024-05-22 22:00:29.935091
 Will: Deposit: R2000.00 on 2024-05-23 14:27:04.499469
 Will: Withdrawal: R100.00 on 2024-05-23 14:28:13.529984
+siphelo: Deposit: R700.00 on 2024-05-24 11:43:31.373219
+siphelo: Deposit: R500.00 on 2024-05-24 11:43:48.600087
+siphelo: Withdrawal: R200.00 on 2024-05-24 11:44:27.848351
